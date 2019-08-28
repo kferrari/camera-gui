@@ -13,7 +13,7 @@ HOST_DEPENDENCIES="debootstrap qemu-user-static binfmt-support sbuild"
 GUEST_DEPENDENCIES="build-essential git m4 sudo python"
 
 # Command used to run the tests
-TEST_COMMAND="bash ./test.sh"
+TEST_COMMAND="run_tests"
 
 function setup_arm_chroot {
     # Host dependencies
@@ -48,6 +48,13 @@ function setup_arm_chroot {
 
     # Call ourselves again which will cause tests to run
     sudo chroot ${CHROOT_DIR} bash -c "cd ${TRAVIS_BUILD_DIR} && ./.travis-ci.sh"
+}
+
+function run_tests {
+  # Run scripts to test
+  bash install.sh
+  bash update.sh
+  bash uninstall.sh
 }
 
 if [ -e "/.chroot_is_done" ]; then

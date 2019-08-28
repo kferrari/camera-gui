@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-echo "http://archive.raspberrypi.org/debian/" | sudo tee -a /etc/apt/sources.list
+# Add raspberry sources (required for travis build)
+wget https://archive.raspbian.org/raspbian.public.key -O - | sudo apt-key add -
+echo 'deb http://archive.raspbian.org/raspbian/ buster main contrib non-free' | sudo tee -a /etc/apt/sources.list
+echo 'deb-src http://archive.raspbian.org/raspbian buster main contrib non-free' | sudo tee -a /etc/apt/sources.list
+
+# Install raspi-config (required for travis build)
 sudo apt-get update
 sudo apt-get install raspi-config
 
