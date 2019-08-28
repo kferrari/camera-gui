@@ -7,7 +7,7 @@ echo 'deb-src http://archive.raspbian.org/raspbian buster main' | sudo tee -a /e
 
 # Install raspi-config (required for travis build)
 sudo apt-get update
-sudo apt-get install raspi-config
+sudo apt-get install raspi-config -y --allow-unauthenticated
 
 # Create Code folder and cd into it
 echo "Creating Code folder"
