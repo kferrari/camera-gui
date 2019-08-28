@@ -57,10 +57,8 @@ git clone https://github.com/PiSupply/Bright-Pi.git
 cd Bright-Pi
 sudo python setup.py install
 
-status = $?
-
 if [ ! -z "$CI" ] ; then
-  exit "$status"
+  exit 0
 else
   # Reboot raspberry
   whiptail --msgbox "The system will now reboot" 8 40
