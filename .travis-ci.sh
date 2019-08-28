@@ -55,6 +55,8 @@ function run_tests {
   bash install.sh
   bash update.sh
   bash uninstall.sh
+
+  exit 0
 }
 
 if [ -e "/.chroot_is_done" ]; then
