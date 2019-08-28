@@ -24,20 +24,22 @@ else
   echo "Success!"
 fi
 
-# Enable camera
-echo "Enabling camera..."
-if sudo raspi-config nonint do_camera 0 ; then
-  echo "Success!"
-else
-  exit $?
-fi
+if [ ! -z "$CI"] ; then
+  # Enable camera
+  echo "Enabling camera..."
+  if sudo raspi-config nonint do_camera 0 ; then
+    echo "Success!"
+  else
+    exit $?
+  fi
 
-# Enable I2C for BrightPi control
-echo "Enabling I2C..."
-if sudo raspi-config nonint do_i2c 0 ; then
-  echo "Success!"
-else
-  exit $?
+  # Enable I2C for BrightPi control
+  echo "Enabling I2C..."
+  if sudo raspi-config nonint do_i2c 0 ; then
+    echo "Success!"
+  else
+    exit $?
+  fi
 fi
 
 # Install python-smbus if not installed
