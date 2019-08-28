@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+echo "http://archive.raspberrypi.org/debian/" | sudo tee -a /etc/apt/sources.list
 sudo apt-get update
 sudo apt-get install raspi-config
 
 # Create Code folder and cd into it
 sudo mkdir -p /home/pi/Code
 cd /home/pi/Code
+sudo chown -R travis /home/pi/Code
 
 # Clone into pupillometry repository
 git clone https://github.com/kferrari/camera-gui.git # change this to public repo
