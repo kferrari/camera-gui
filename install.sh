@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
+sudo apt-get update
+sudo apt-get install raspi-config
+
 # Create Code folder and cd into it
-mkdir -p /home/pi/Code
+sudo mkdir -p /home/pi/Code
 cd /home/pi/Code
 
 # Clone into pupillometry repository
-git clone https://github.com/EIN-lab/camera-gui.git
+git clone https://github.com/kferrari/camera-gui.git # change this to public repo
 
 # Enable camera
 sudo raspi-config nonint do_camera 0
