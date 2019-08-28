@@ -8,7 +8,7 @@ sudo rm /usr/local/bin/brightpi*
 sudo rm -R /home/pi/Code/camera-gui
 
 # Remove Code directory only if it's empty
-DIR = "/home/pi/Code"
+DIR="/home/pi/Code"
 if [ ! "$(ls -A $DIR)" ]; then
   sudo rm -R /home/pi/Code
 fi
