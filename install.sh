@@ -24,7 +24,7 @@ else
   echo "Success!"
 fi
 
-if [ ! -z "$CI"] ; then
+if [ -z "$CI"] ; then
   # Enable camera
   echo "Enabling camera..."
   if sudo raspi-config nonint do_camera 0 ; then
@@ -40,6 +40,8 @@ if [ ! -z "$CI"] ; then
   else
     exit $?
   fi
+else
+  echo "CI detected, skipping raspi-config"
 fi
 
 # Install python-smbus if not installed
