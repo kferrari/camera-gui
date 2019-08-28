@@ -2,8 +2,8 @@
 
 # Add raspberry sources (required for travis build)
 wget https://archive.raspbian.org/raspbian.public.key -O - | sudo apt-key add -
-echo 'deb http://archive.raspbian.org/raspbian/ buster main contrib non-free' | sudo tee -a /etc/apt/sources.list
-echo 'deb-src http://archive.raspbian.org/raspbian buster main contrib non-free' | sudo tee -a /etc/apt/sources.list
+echo 'deb http://archive.raspberrypi.org/debian/ buster main' | sudo tee -a /etc/apt/sources.list
+echo 'deb-src http://archive.raspbian.org/raspbian buster main' | sudo tee -a /etc/apt/sources.list
 
 # Install raspi-config (required for travis build)
 sudo apt-get update
@@ -16,33 +16,49 @@ cd /home/pi/Code
 sudo chown -R travis /home/pi/Code
 
 # Clone into camera-gui repository
-echo "Cloning camera-gui repository"
+echo "Cloning camera-gui repository..."
 git clone https://github.com/kferrari/camera-gui.git # change this to public repo
 if [ ! -d "camera-gui" ]; then
   exit 1
+else
+  echo "Success!"
 fi
 
 # Enable camera
 echo "Enabling camera..."
 if sudo raspi-config nonint do_camera 0 ; then
-  echo "Success"
+  echo "Success!"
 else
   exit $?
 fi
 
 # Enable I2C for BrightPi control
-sudo raspi-config nonint do_i2c 0
+echo "Enabling I2C..."
+if sudo raspi-config nonint do_i2c 0 ; then
+  echo "Success!"
+else
+  exit $?
+fi
 
 # Install python-smbus if not installed
-sudo apt-get install python-smbus -y
+echo "Installing python dependencies"
+if sudo apt-get install python-smbus -y ; then
+  echo "Success!"
+else
+  exit $?
+fi
 
 # Clone into BrightPi repository and run install script
 git clone https://github.com/PiSupply/Bright-Pi.git
 cd Bright-Pi
 sudo python setup.py install
 
-exit $?
+status = $?
 
-# Reboot raspberry
-whiptail --msgbox "The system will now reboot" 8 40
-sudo reboot
+if [ ! -z "$CI"] ; then
+  exit "$status"
+else
+  # Reboot raspberry
+  whiptail --msgbox "The system will now reboot" 8 40
+  sudo reboot
+fi
