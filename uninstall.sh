@@ -13,5 +13,5 @@ if [ ! "$(ls -A $DIR)" ]; then
   sudo rm -R /home/pi/Code
 fi
 
-# Reboot raspberry
-whiptail --msgbox "Bright-Pi and camera-gui successfully uninstalled" 8 40
+# Done
+echo "Bright-Pi and camera-gui successfully uninstalled"
