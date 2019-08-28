@@ -57,7 +57,7 @@ sudo python setup.py install
 
 status = $?
 
-if [ ! -z "$CI"] ; then
+if [ ! -z "$CI" ] ; then
   exit "$status"
 else
   # Reboot raspberry
