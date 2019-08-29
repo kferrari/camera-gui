@@ -5,4 +5,4 @@ env:
   - ARCH=arm
 
 script:
-  - "bash -ex .travis-ci.sh"
+  - "travis_wait 30 sleep 1800 & bash -ex .travis-ci.sh"
