@@ -7,7 +7,7 @@ VERSION=buster
 CHROOT_ARCH=armhf
 
 # Debian package dependencies for the host
-HOST_DEPENDENCIES="debootstrap qemu-user-static binfmt-support sbuild"
+HOST_DEPENDENCIES="debootstrap qemu-user-static binfmt-support sbuild chroot"
 
 # Debian package dependencies for the chrooted environment
 GUEST_DEPENDENCIES="build-essential git m4 sudo python"
